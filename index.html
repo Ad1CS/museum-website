@@ -1,0 +1,1851 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Музей Трудовой и Воинской Славы — Ленинградский мясокомбинат им. С.М. Кирова</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=PT+Serif:ital,wght@0,400;0,700;1,400&family=PT+Sans:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --red: #C0392B;
+    --red-bright: #E74C3C;
+    --red-dark: #8B1A1A;
+    --black: #0A0A0A;
+    --dark: #111111;
+    --dark2: #1A1A1A;
+    --dark3: #222222;
+    --dark4: #2A2A2A;
+    --gray: #888888;
+    --gray-light: #AAAAAA;
+    --white: #F0EDE8;
+    --white-dim: #C8C5C0;
+    --border: rgba(192,57,43,0.25);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'PT Sans', sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  /* ---- HEADER ---- */
+  #header {
+    background: var(--dark);
+    border-bottom: 2px solid var(--red);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+
+  .header-top {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 12px 40px;
+    border-bottom: 1px solid var(--dark4);
+  }
+
+  .logo-emblem {
+    width: 64px;
+    height: 64px;
+    flex-shrink: 0;
+  }
+
+  .logo-emblem svg { width: 100%; height: 100%; }
+
+  .header-title {
+    flex: 1;
+  }
+
+  .header-title h1 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--red-bright);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    line-height: 1.2;
+  }
+
+  .header-title p {
+    font-family: 'Oswald', sans-serif;
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--gray-light);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-top: 2px;
+  }
+
+  .header-search {
+    display: flex;
+    align-items: center;
+    background: var(--dark3);
+    border: 1px solid var(--dark4);
+    border-radius: 2px;
+    padding: 6px 12px;
+    gap: 8px;
+    min-width: 260px;
+    transition: border-color 0.2s;
+  }
+
+  .header-search:focus-within { border-color: var(--red); }
+
+  .header-search input {
+    background: none;
+    border: none;
+    outline: none;
+    color: var(--white);
+    font-family: 'PT Sans', sans-serif;
+    font-size: 13px;
+    width: 100%;
+    letter-spacing: 0.04em;
+  }
+
+  .header-search input::placeholder { color: var(--gray); }
+
+  .header-search button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--gray);
+    display: flex;
+    align-items: center;
+    transition: color 0.2s;
+  }
+
+  .header-search button:hover { color: var(--red-bright); }
+
+  /* ---- NAV ---- */
+  nav {
+    display: flex;
+    padding: 0 40px;
+  }
+
+  nav a {
+    font-family: 'Oswald', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--white-dim);
+    text-decoration: none;
+    padding: 14px 24px;
+    border-right: 1px solid var(--dark4);
+    transition: all 0.2s;
+    cursor: pointer;
+    display: block;
+  }
+
+  nav a:first-child { border-left: 1px solid var(--dark4); }
+
+  nav a:hover, nav a.active {
+    color: var(--red-bright);
+    background: rgba(192,57,43,0.08);
+  }
+
+  nav a.active {
+    border-bottom: 2px solid var(--red-bright);
+    margin-bottom: -2px;
+  }
+
+  /* ---- NEWS TICKER ---- */
+  .news-ticker {
+    background: var(--red-dark);
+    padding: 6px 40px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    overflow: hidden;
+  }
+
+  .ticker-label {
+    font-family: 'Oswald', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--white);
+    white-space: nowrap;
+    background: var(--red);
+    padding: 2px 8px;
+    border-radius: 1px;
+  }
+
+  .ticker-text {
+    font-size: 12px;
+    color: rgba(240,237,232,0.85);
+    white-space: nowrap;
+    animation: ticker 30s linear infinite;
+  }
+
+  @keyframes ticker {
+    0% { transform: translateX(100vw); }
+    100% { transform: translateX(-200%); }
+  }
+
+  /* ---- PAGES ---- */
+  .page { display: none; min-height: calc(100vh - 120px); }
+  .page.active { display: block; }
+
+  /* ---- HOME PAGE ---- */
+  .home-hero {
+    position: relative;
+    background: linear-gradient(135deg, var(--dark) 0%, #1a0505 50%, var(--dark2) 100%);
+    padding: 80px 40px;
+    overflow: hidden;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .home-hero::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(255,255,255,0.012) 2px,
+      rgba(255,255,255,0.012) 4px
+    );
+    pointer-events: none;
+  }
+
+  .home-hero-content {
+    position: relative;
+    max-width: 700px;
+  }
+
+  .home-hero-tag {
+    font-family: 'Oswald', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--red-bright);
+    margin-bottom: 16px;
+  }
+
+  .home-hero h2 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 52px;
+    font-weight: 700;
+    line-height: 1.05;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    margin-bottom: 20px;
+    color: var(--white);
+  }
+
+  .home-hero p {
+    font-family: 'PT Serif', serif;
+    font-size: 16px;
+    color: var(--white-dim);
+    line-height: 1.7;
+    max-width: 560px;
+  }
+
+  .home-blocks-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .home-block-card {
+    padding: 36px 32px;
+    border-right: 1px solid var(--border);
+    cursor: pointer;
+    transition: background 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .home-block-card:last-child { border-right: none; }
+
+  .home-block-card:hover { background: rgba(192,57,43,0.06); }
+
+  .home-block-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--red);
+    transform: scaleX(0);
+    transition: transform 0.3s;
+    transform-origin: left;
+  }
+
+  .home-block-card:hover::after { transform: scaleX(1); }
+
+  .block-icon {
+    width: 44px;
+    height: 44px;
+    background: rgba(192,57,43,0.12);
+    border: 1px solid var(--red-dark);
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 16px;
+    color: var(--red-bright);
+  }
+
+  .home-block-card h3 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--white);
+    margin-bottom: 8px;
+  }
+
+  .home-block-card p {
+    font-size: 13px;
+    color: var(--gray);
+    line-height: 1.5;
+  }
+
+  /* NEWS BLOCK on home */
+  .home-news {
+    padding: 40px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+
+  .section-header h2 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--white);
+  }
+
+  .section-header a {
+    font-size: 12px;
+    color: var(--red-bright);
+    text-decoration: none;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    font-family: 'Oswald', sans-serif;
+  }
+
+  .news-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 1px;
+    background: var(--dark3);
+  }
+
+  .news-card {
+    background: var(--dark);
+    padding: 24px;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  .news-card:hover { background: var(--dark2); }
+
+  .news-card-date {
+    font-family: 'Oswald', sans-serif;
+    font-size: 11px;
+    color: var(--red-bright);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  .news-card h3 {
+    font-family: 'PT Serif', serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1.35;
+    margin-bottom: 8px;
+  }
+
+  .news-card.featured h3 { font-size: 20px; }
+
+  .news-card p {
+    font-size: 13px;
+    color: var(--gray);
+    line-height: 1.5;
+  }
+
+  .news-card-img {
+    height: 160px;
+    background: var(--dark3);
+    margin-bottom: 16px;
+    overflow: hidden;
+    border: 1px solid var(--dark4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--dark4);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    font-family: 'Oswald', sans-serif;
+    text-transform: uppercase;
+  }
+
+  /* ---- FOND PAGE ---- */
+  .page-container { padding: 32px 40px; }
+
+  .page-toolbar {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 28px;
+    flex-wrap: wrap;
+  }
+
+  .view-toggle {
+    display: flex;
+    border: 1px solid var(--dark4);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .view-btn {
+    padding: 8px 16px;
+    background: var(--dark2);
+    border: none;
+    color: var(--gray);
+    cursor: pointer;
+    font-family: 'Oswald', sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition: all 0.2s;
+    border-right: 1px solid var(--dark4);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .view-btn:last-child { border-right: none; }
+  .view-btn.active, .view-btn:hover { background: var(--red); color: var(--white); }
+
+  .search-bar {
+    display: flex;
+    flex: 1;
+    min-width: 220px;
+    background: var(--dark2);
+    border: 1px solid var(--dark4);
+    border-radius: 2px;
+    padding: 8px 14px;
+    gap: 8px;
+    align-items: center;
+    transition: border-color 0.2s;
+  }
+
+  .search-bar:focus-within { border-color: var(--red); }
+
+  .search-bar input {
+    background: none;
+    border: none;
+    outline: none;
+    color: var(--white);
+    font-family: 'PT Sans', sans-serif;
+    font-size: 13px;
+    width: 100%;
+  }
+
+  .search-bar input::placeholder { color: var(--gray); }
+
+  .filter-select {
+    background: var(--dark2);
+    border: 1px solid var(--dark4);
+    border-radius: 2px;
+    padding: 8px 14px;
+    color: var(--white-dim);
+    font-family: 'PT Sans', sans-serif;
+    font-size: 13px;
+    cursor: pointer;
+    outline: none;
+  }
+
+  .filter-select:focus { border-color: var(--red); }
+
+  .result-count {
+    font-size: 12px;
+    color: var(--gray);
+    margin-left: auto;
+    font-family: 'Oswald', sans-serif;
+    letter-spacing: 0.06em;
+  }
+
+  /* CATALOG GRID */
+  .catalog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1px;
+    background: var(--dark3);
+  }
+
+  .catalog-card {
+    background: var(--dark);
+    cursor: pointer;
+    transition: background 0.2s;
+    overflow: hidden;
+  }
+
+  .catalog-card:hover { background: var(--dark2); }
+
+  .catalog-card-img {
+    height: 160px;
+    background: var(--dark3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid var(--dark4);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .catalog-card-img span {
+    font-size: 11px;
+    color: var(--dark4);
+    font-family: 'Oswald', sans-serif;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .item-type-badge {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: rgba(10,10,10,0.8);
+    border: 1px solid var(--red-dark);
+    font-family: 'Oswald', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--red-bright);
+    padding: 2px 6px;
+  }
+
+  .catalog-card-info {
+    padding: 12px 14px;
+  }
+
+  .catalog-card-info h4 {
+    font-family: 'PT Serif', serif;
+    font-size: 13px;
+    color: var(--white);
+    line-height: 1.35;
+    margin-bottom: 4px;
+  }
+
+  .catalog-card-info p {
+    font-size: 11px;
+    color: var(--gray);
+  }
+
+  /* CATALOG LIST */
+  .catalog-list { display: none; }
+  .catalog-list.active { display: block; }
+  .catalog-grid.list-mode { display: none; }
+
+  .list-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--dark3);
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  .list-item:hover { background: var(--dark2); }
+
+  .list-item-num {
+    font-family: 'Oswald', sans-serif;
+    font-size: 12px;
+    color: var(--gray);
+    min-width: 32px;
+  }
+
+  .list-item-thumb {
+    width: 56px;
+    height: 42px;
+    background: var(--dark3);
+    flex-shrink: 0;
+    border: 1px solid var(--dark4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    color: var(--dark4);
+    font-family: 'Oswald', sans-serif;
+  }
+
+  .list-item-info { flex: 1; }
+  .list-item-info h4 { font-size: 14px; color: var(--white); margin-bottom: 2px; }
+  .list-item-info p { font-size: 12px; color: var(--gray); }
+
+  .list-item-meta {
+    font-size: 11px;
+    color: var(--gray);
+    text-align: right;
+    font-family: 'Oswald', sans-serif;
+  }
+
+  /* FUNDS LIST */
+  .funds-list { display: none; }
+  .funds-list.active { display: block; }
+
+  .fund-item {
+    display: grid;
+    grid-template-columns: 120px 1fr auto;
+    gap: 24px;
+    align-items: start;
+    padding: 20px 16px;
+    border-bottom: 1px solid var(--dark3);
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  .fund-item:hover { background: var(--dark2); }
+
+  .fund-item-id {
+    font-family: 'Oswald', sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--white);
+  }
+
+  .fund-item-date {
+    font-size: 12px;
+    color: var(--gray);
+    margin-top: 4px;
+    font-family: 'Oswald', sans-serif;
+  }
+
+  .fund-item-name {
+    font-family: 'PT Serif', serif;
+    font-size: 14px;
+    color: var(--white);
+    line-height: 1.4;
+    font-weight: 700;
+  }
+
+  .fund-item-desc {
+    font-size: 13px;
+    color: var(--gray);
+    margin-top: 6px;
+    line-height: 1.4;
+  }
+
+  .fund-item-stats {
+    text-align: right;
+    font-family: 'Oswald', sans-serif;
+  }
+
+  .fund-item-stats span {
+    display: block;
+    font-size: 12px;
+    color: var(--gray);
+  }
+
+  .fund-item-stats strong {
+    font-size: 14px;
+    color: var(--white-dim);
+  }
+
+  /* ---- PHOTO GALLERY ---- */
+  .photo-film-strip {
+    height: 260px;
+    background: var(--dark2);
+    border-bottom: 1px solid var(--border);
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+
+  .film-strip-inner {
+    display: flex;
+    gap: 3px;
+    animation: filmScroll 40s linear infinite;
+    padding: 0 20px;
+  }
+
+  @keyframes filmScroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  .film-photo {
+    width: 200px;
+    height: 220px;
+    flex-shrink: 0;
+    background: var(--dark3);
+    border: 1px solid var(--dark4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    color: var(--dark4);
+    font-family: 'Oswald', sans-serif;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: border-color 0.2s, transform 0.2s;
+    position: relative;
+  }
+
+  .film-photo:hover {
+    border-color: var(--red);
+    transform: scale(1.02);
+    z-index: 2;
+  }
+
+  .film-strip-overlay {
+    position: absolute;
+    bottom: 16px;
+    right: 40px;
+    background: rgba(10,10,10,0.8);
+    border: 1px solid var(--red-dark);
+    padding: 8px 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: background 0.2s;
+    font-family: 'Oswald', sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--white-dim);
+  }
+
+  .film-strip-overlay:hover { background: var(--red); color: var(--white); }
+
+  .albums-section { padding: 40px; }
+
+  .period-label {
+    font-family: 'Oswald', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--red-bright);
+    margin-bottom: 4px;
+  }
+
+  .period-title {
+    font-family: 'Oswald', sans-serif;
+    font-size: 28px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--white);
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .albums-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 12px;
+    margin-bottom: 48px;
+  }
+
+  .album-card {
+    background: var(--dark2);
+    border: 1px solid var(--dark4);
+    cursor: pointer;
+    transition: all 0.2s;
+    overflow: hidden;
+  }
+
+  .album-card:hover {
+    border-color: var(--red);
+    transform: translateY(-2px);
+  }
+
+  .album-cover {
+    height: 140px;
+    background: var(--dark3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    color: var(--dark4);
+    font-family: 'Oswald', sans-serif;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border-bottom: 1px solid var(--dark4);
+  }
+
+  .album-info {
+    padding: 12px 14px;
+  }
+
+  .album-info h4 {
+    font-family: 'PT Serif', serif;
+    font-size: 13px;
+    color: var(--white);
+    margin-bottom: 4px;
+    line-height: 1.3;
+  }
+
+  .album-info p { font-size: 11px; color: var(--gray); }
+
+  /* ---- STAFF PAGE ---- */
+  .staff-alpha {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    padding: 24px 40px;
+    border-bottom: 1px solid var(--border);
+    background: var(--dark2);
+  }
+
+  .alpha-btn {
+    background: none;
+    border: 1px solid var(--dark4);
+    color: var(--gray-light);
+    font-family: 'Oswald', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    width: 36px;
+    height: 36px;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .alpha-btn:hover, .alpha-btn.active {
+    background: var(--red);
+    border-color: var(--red);
+    color: var(--white);
+  }
+
+  .staff-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1px;
+    background: var(--dark3);
+    padding: 0;
+  }
+
+  .staff-card {
+    background: var(--dark);
+    padding: 20px;
+    display: flex;
+    gap: 16px;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  .staff-card:hover { background: var(--dark2); }
+
+  .staff-photo {
+    width: 64px;
+    height: 80px;
+    background: var(--dark3);
+    flex-shrink: 0;
+    border: 1px solid var(--dark4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 9px;
+    color: var(--dark4);
+    font-family: 'Oswald', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    text-align: center;
+  }
+
+  .staff-info h3 {
+    font-family: 'PT Serif', serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1.3;
+    margin-bottom: 4px;
+  }
+
+  .staff-info p { font-size: 12px; color: var(--gray); margin-bottom: 2px; }
+
+  .staff-link {
+    font-size: 11px;
+    color: var(--red-bright);
+    font-family: 'Oswald', sans-serif;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-top: 6px;
+    display: inline-block;
+  }
+
+  /* ---- MAP PAGE ---- */
+  .map-container {
+    position: relative;
+    height: calc(100vh - 200px);
+    background: var(--dark2);
+    overflow: hidden;
+  }
+
+  .map-bg {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .map-placeholder {
+    width: 85%;
+    height: 80%;
+    background: var(--dark3);
+    border: 1px solid var(--dark4);
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Fake territory layout */
+  .map-territory-label {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    font-family: 'Oswald', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gray);
+    border: 1px solid var(--dark4);
+    padding: 4px 8px;
+    background: rgba(10,10,10,0.6);
+  }
+
+  .map-building {
+    position: absolute;
+    border: 2px solid var(--red-dark);
+    background: rgba(139,26,26,0.15);
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .map-building:hover {
+    background: rgba(192,57,43,0.3);
+    border-color: var(--red-bright);
+    z-index: 5;
+  }
+
+  .map-building:hover .building-label { opacity: 1; }
+
+  .building-label {
+    background: rgba(10,10,10,0.9);
+    border: 1px solid var(--red-dark);
+    padding: 4px 8px;
+    font-family: 'Oswald', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--white-dim);
+    white-space: nowrap;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+    text-align: center;
+    pointer-events: none;
+  }
+
+  .map-building-dot {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    width: 8px;
+    height: 8px;
+    background: var(--red-bright);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(1.5); }
+  }
+
+  .map-sidebar {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 300px;
+    height: 100%;
+    background: var(--dark);
+    border-left: 1px solid var(--border);
+    padding: 24px;
+    overflow-y: auto;
+  }
+
+  .map-sidebar h3 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--red-bright);
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .building-list-item {
+    padding: 12px 0;
+    border-bottom: 1px solid var(--dark3);
+    cursor: pointer;
+    transition: color 0.2s;
+  }
+
+  .building-list-item:hover h4 { color: var(--red-bright); }
+
+  .building-list-item h4 {
+    font-family: 'PT Serif', serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 3px;
+    transition: color 0.2s;
+  }
+
+  .building-list-item p { font-size: 11px; color: var(--gray); }
+
+  /* ---- ITEM CARD MODAL ---- */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.85);
+    z-index: 2000;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+  }
+
+  .modal-overlay.open { display: flex; }
+
+  .modal {
+    background: var(--dark);
+    border: 1px solid var(--border);
+    max-width: 800px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+  }
+
+  .modal-close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: none;
+    border: 1px solid var(--dark4);
+    color: var(--gray);
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    z-index: 10;
+    transition: all 0.2s;
+  }
+
+  .modal-close:hover { background: var(--red); border-color: var(--red); color: var(--white); }
+
+  .modal-back {
+    font-family: 'Oswald', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gray);
+    padding: 16px 24px;
+    border-bottom: 1px solid var(--dark3);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+  }
+
+  .modal-back:hover { color: var(--red-bright); }
+
+  .modal-body {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 0;
+  }
+
+  .modal-photo {
+    height: 320px;
+    background: var(--dark3);
+    border-right: 1px solid var(--dark3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    color: var(--dark4);
+    font-family: 'Oswald', sans-serif;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .modal-info { padding: 24px; }
+
+  .modal-info h2 {
+    font-family: 'PT Serif', serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1.35;
+    margin-bottom: 16px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--dark3);
+  }
+
+  .modal-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+  .modal-field label {
+    display: block;
+    font-family: 'Oswald', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gray);
+    margin-bottom: 3px;
+  }
+
+  .modal-field span {
+    font-size: 13px;
+    color: var(--white-dim);
+  }
+
+  .modal-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: 'Oswald', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--red-bright);
+    text-decoration: none;
+    margin-top: 16px;
+    cursor: pointer;
+  }
+
+  .modal-link:hover { text-decoration: underline; }
+
+  /* ---- FOOTER ---- */
+  footer {
+    background: var(--dark);
+    border-top: 2px solid var(--red-dark);
+    padding: 28px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: auto;
+  }
+
+  footer p {
+    font-size: 12px;
+    color: var(--gray);
+    font-family: 'Oswald', sans-serif;
+    letter-spacing: 0.06em;
+  }
+
+  .footer-contact {
+    font-size: 12px;
+    color: var(--gray);
+    text-align: right;
+  }
+
+  .footer-contact a { color: var(--red-bright); text-decoration: none; }
+
+  /* ---- UTILS ---- */
+  .red { color: var(--red-bright); }
+  .tag {
+    display: inline-block;
+    background: rgba(192,57,43,0.15);
+    border: 1px solid var(--red-dark);
+    color: var(--red-bright);
+    font-family: 'Oswald', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 2px 7px;
+    border-radius: 1px;
+  }
+
+  hr.section-divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 32px 0;
+  }
+
+  /* scroll */
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: var(--dark2); }
+  ::-webkit-scrollbar-thumb { background: var(--red-dark); border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--red); }
+
+  /* responsive */
+  @media (max-width: 900px) {
+    .home-blocks-grid { grid-template-columns: 1fr 1fr; }
+    .news-grid { grid-template-columns: 1fr; }
+    .modal-body { grid-template-columns: 1fr; }
+    .header-top { padding: 10px 16px; }
+    nav { padding: 0 16px; overflow-x: auto; }
+    .page-container { padding: 20px 16px; }
+    .map-sidebar { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header id="header">
+  <div class="header-top">
+    <div class="logo-emblem">
+      <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="32" cy="32" r="30" stroke="#C0392B" stroke-width="1.5"/>
+        <circle cx="32" cy="32" r="26" stroke="#C0392B" stroke-width="0.75"/>
+        <circle cx="32" cy="32" r="18" fill="rgba(192,57,43,0.1)" stroke="#C0392B" stroke-width="1"/>
+        <text x="32" y="29" text-anchor="middle" font-family="Oswald" font-size="7" fill="#C0392B" letter-spacing="1" font-weight="600">ЛЕНИ</text>
+        <text x="32" y="37" text-anchor="middle" font-family="Oswald" font-size="7" fill="#C0392B" letter-spacing="1" font-weight="600">МЯСО</text>
+        <!-- Star -->
+        <polygon points="32,12 33.5,17 38.5,17 34.5,20 36,25 32,22 28,25 29.5,20 25.5,17 30.5,17" fill="#C0392B" opacity="0.7"/>
+        <!-- text around circle -->
+        <path id="topArc" d="M 8 32 A 24 24 0 0 1 56 32" fill="none"/>
+        <path id="botArc" d="M 56 32 A 24 24 0 0 1 8 32" fill="none"/>
+        <text font-family="Oswald" font-size="5" fill="#C0392B" letter-spacing="2" opacity="0.8">
+          <textPath href="#topArc">ЛЕНМЯСОПРОМ</textPath>
+        </text>
+        <text font-family="Oswald" font-size="5" fill="#C0392B" letter-spacing="2" opacity="0.8">
+          <textPath href="#botArc">1930 — САНКТ-ПЕТЕРБУРГ</textPath>
+        </text>
+      </svg>
+    </div>
+    <div class="header-title">
+      <h1>Ленинградский мясокомбинат им. С.М. Кирова</h1>
+      <p>Музей трудовой и воинской славы</p>
+    </div>
+    <div class="header-search">
+      <input type="text" placeholder="Поиск по всему музею...">
+      <button>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+  <nav>
+    <a class="active" onclick="showPage('home')">Главная</a>
+    <a onclick="showPage('fond')">Фонд</a>
+    <a onclick="showPage('gallery')">Фотогалерея</a>
+    <a onclick="showPage('staff')">Сотрудники</a>
+    <a onclick="showPage('map')">Интерактивная карта</a>
+    <a onclick="showPage('news')">Новости</a>
+  </nav>
+</header>
+
+<!-- NEWS TICKER -->
+<div class="news-ticker">
+  <span class="ticker-label">Новости</span>
+  <span class="ticker-text">Открытие новой выставки «Блокадный мясокомбинат» — 25 января 2026 &nbsp;•&nbsp; Оцифровано 347 новых документов из фонда № 12 &nbsp;•&nbsp; Передача личных вещей ветерана Петрова В.И. в фонды музея &nbsp;•&nbsp; Экспедиция по сбору воспоминаний ветеранов комбината — апрель 2026</span>
+</div>
+
+<!-- =================== HOME =================== -->
+<div id="page-home" class="page active">
+  <div class="home-hero">
+    <div class="home-hero-content">
+      <p class="home-hero-tag">Цифровой музей · Основан 2025</p>
+      <h2>История в<br>каждом предмете</h2>
+      <p>Музей трудовой и воинской славы Ленинградского мясокомбината имени С.М. Кирова хранит память о людях и событиях, определивших историю предприятия с 1930-х годов по сегодняшний день.</p>
+    </div>
+  </div>
+
+  <div class="home-blocks-grid">
+    <div class="home-block-card" onclick="showPage('fond')">
+      <div class="block-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+      </div>
+      <h3>Фонд</h3>
+      <p>Каталог всех предметов фонда, документов и архивных материалов</p>
+    </div>
+    <div class="home-block-card" onclick="showPage('gallery')">
+      <div class="block-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+      </div>
+      <h3>Фотогалерея</h3>
+      <p>Архивные фотографии по историческим периодам, 1900–наст. время</p>
+    </div>
+    <div class="home-block-card" onclick="showPage('staff')">
+      <div class="block-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      </div>
+      <h3>Сотрудники</h3>
+      <p>База данных работников предприятия с биографическими карточками</p>
+    </div>
+    <div class="home-block-card" onclick="showPage('map')">
+      <div class="block-icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg>
+      </div>
+      <h3>Карта</h3>
+      <p>Интерактивная карта территории предприятия с историей зданий</p>
+    </div>
+  </div>
+
+  <div class="home-news">
+    <div class="section-header">
+      <h2>Новостной блок</h2>
+      <a onclick="showPage('news')">Все новости →</a>
+    </div>
+    <div class="news-grid">
+      <div class="news-card featured">
+        <div class="news-card-date">18 февраля 2026</div>
+        <div class="news-card-img">Фото события</div>
+        <h3>Открытие выставки «Блокадный мясокомбинат: 900 дней на передовой»</h3>
+        <p>В музее открылась постоянная экспозиция, посвящённая работе предприятия в годы блокады Ленинграда. В витринах представлены подлинные документы, личные вещи сотрудников и архивные фотографии 1941–1944 годов.</p>
+      </div>
+      <div class="news-card">
+        <div class="news-card-date">5 марта 2026</div>
+        <div class="news-card-img">Фото</div>
+        <h3>Передача архива семьи Громовых</h3>
+        <p>Семья потомственных работников комбината передала в фонды музея личный архив, включающий письма и документы 1940–60-х годов.</p>
+      </div>
+      <div class="news-card">
+        <div class="news-card-date">1 марта 2026</div>
+        <div class="news-card-img">Фото</div>
+        <h3>Оцифровка фонда №12: первые результаты</h3>
+        <p>Завершён первый этап оцифровки архивных документов — в каталоге появилось 347 новых карточек.</p>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div>
+      <p>© 2026 Музей трудовой и воинской славы</p>
+      <p style="margin-top:4px;">Ленинградский мясокомбинат им. С.М. Кирова</p>
+    </div>
+    <div class="footer-contact">
+      <p>Санкт-Петербург, ул. Московское шоссе</p>
+      <p><a href="#">museum@kirovmeat.ru</a></p>
+    </div>
+  </footer>
+</div>
+
+<!-- =================== FOND =================== -->
+<div id="page-fond" class="page">
+  <div class="page-container">
+    <div class="page-toolbar">
+      <div class="view-toggle">
+        <button class="view-btn active" id="btn-catalog" onclick="switchFondMode('catalog')">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+          Каталог
+        </button>
+        <button class="view-btn" id="btn-funds" onclick="switchFondMode('funds')">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+          Список фондов
+        </button>
+      </div>
+      <div class="search-bar">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:var(--gray)"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <input type="text" id="fond-search" placeholder="Поиск по каталогу..." oninput="filterCatalog()">
+      </div>
+      <select class="filter-select" onchange="filterCatalog()">
+        <option value="">Все категории</option>
+        <option>Фото</option>
+        <option>Видео</option>
+        <option>Документы</option>
+        <option>Предметы</option>
+      </select>
+      <span class="result-count" id="result-count">Найдено: 24 предмета</span>
+    </div>
+
+    <!-- CATALOG GRID MODE -->
+    <div id="catalog-view">
+      <div class="catalog-grid" id="catalog-grid">
+        <!-- populated by JS -->
+      </div>
+    </div>
+
+    <!-- FUNDS LIST MODE -->
+    <div id="funds-view" style="display:none;">
+      <div class="page-toolbar" style="margin-top:0; margin-bottom:20px;">
+        <div class="search-bar">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:var(--gray)"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          <input type="text" placeholder="Поиск по фондам...">
+        </div>
+        <select class="filter-select">
+          <option>Все периоды</option>
+          <option>1900–1930</option>
+          <option>1931–1940</option>
+          <option>1941–1945</option>
+          <option>1946–1992</option>
+          <option>1992–2007</option>
+          <option>2007–НВ</option>
+        </select>
+        <span class="result-count">Фондов: 8</span>
+      </div>
+      <div class="funds-list active" id="funds-list">
+        <!-- populated by JS -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- =================== GALLERY =================== -->
+<div id="page-gallery" class="page">
+  <div class="photo-film-strip">
+    <div class="film-strip-inner" id="film-strip">
+      <!-- populated by JS -->
+    </div>
+    <div class="film-strip-overlay" onclick="scrollToAlbums()">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      К альбомам ↓
+    </div>
+  </div>
+
+  <div class="albums-section" id="albums-section">
+    <!-- populated by JS -->
+  </div>
+</div>
+
+<!-- =================== STAFF =================== -->
+<div id="page-staff" class="page">
+  <div class="staff-alpha">
+    <!-- populated by JS -->
+  </div>
+  <div class="page-container" style="padding-top: 20px;">
+    <div class="page-toolbar">
+      <div class="search-bar">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:var(--gray)"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <input type="text" placeholder="Поиск по сотрудникам..." oninput="filterStaff(this.value)">
+      </div>
+      <span class="result-count" id="staff-count">Сотрудников: 12</span>
+    </div>
+    <div class="staff-grid" id="staff-grid">
+      <!-- populated by JS -->
+    </div>
+  </div>
+</div>
+
+<!-- =================== MAP =================== -->
+<div id="page-map" class="page">
+  <div class="map-container">
+    <div class="map-bg">
+      <div class="map-placeholder">
+        <div class="map-territory-label">Территория предприятия · Спутниковая схема</div>
+
+        <!-- Buildings (approximate layout) -->
+        <div class="map-building" style="left:15%;top:20%;width:18%;height:22%;" onclick="showBuilding('lifestak')">
+          <div class="building-label">Лайф-стак</div>
+          <div class="map-building-dot"></div>
+        </div>
+        <div class="map-building" style="left:38%;top:15%;width:22%;height:18%;" onclick="showBuilding('util')">
+          <div class="building-label">Утиль-завод</div>
+          <div class="map-building-dot"></div>
+        </div>
+        <div class="map-building" style="left:20%;top:50%;width:25%;height:20%;" onclick="showBuilding('uboyny')">
+          <div class="building-label">Убойно-разделочный корпус</div>
+          <div class="map-building-dot"></div>
+        </div>
+        <div class="map-building" style="left:50%;top:45%;width:28%;height:24%;" onclick="showBuilding('cold')">
+          <div class="building-label">Холодильно-колбасный корпус</div>
+          <div class="map-building-dot"></div>
+        </div>
+        <div class="map-building" style="left:65%;top:15%;width:16%;height:16%;" onclick="showBuilding('admin')">
+          <div class="building-label">Административный корпус</div>
+          <div class="map-building-dot"></div>
+        </div>
+      </div>
+    </div>
+    <div class="map-sidebar">
+      <h3>Здания предприятия</h3>
+      <div class="building-list-item" onclick="showBuilding('lifestak')">
+        <h4>Лайф-стак</h4>
+        <p>Скотобаза, 1930–1932</p>
+      </div>
+      <div class="building-list-item" onclick="showBuilding('util')">
+        <h4>Утиль-завод</h4>
+        <p>Переработка вторичного сырья, 1933</p>
+      </div>
+      <div class="building-list-item" onclick="showBuilding('uboyny')">
+        <h4>Убойно-разделочный корпус</h4>
+        <p>Главный производственный корпус, 1932</p>
+      </div>
+      <div class="building-list-item" onclick="showBuilding('cold')">
+        <h4>Холодильно-колбасный корпус</h4>
+        <p>Хранение и производство, 1935</p>
+      </div>
+      <div class="building-list-item" onclick="showBuilding('admin')">
+        <h4>Административный корпус</h4>
+        <p>Управление предприятием, 1931</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- =================== NEWS =================== -->
+<div id="page-news" class="page">
+  <div class="page-container">
+    <div class="section-header" style="margin-bottom:28px;">
+      <h2>Новостной блок</h2>
+    </div>
+    <div id="news-feed">
+      <!-- populated by JS -->
+    </div>
+  </div>
+</div>
+
+<!-- =================== ITEM CARD MODAL =================== -->
+<div class="modal-overlay" id="modal-item" onclick="closeModal('modal-item')">
+  <div class="modal" onclick="event.stopPropagation()">
+    <button class="modal-close" onclick="closeModal('modal-item')">✕</button>
+    <div class="modal-back" onclick="closeModal('modal-item')">
+      ← Назад в каталог
+    </div>
+    <div class="modal-body">
+      <div class="modal-photo">Изображение предмета</div>
+      <div class="modal-info" id="modal-item-content">
+        <!-- populated by JS -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- =================== BUILDING MODAL =================== -->
+<div class="modal-overlay" id="modal-building" onclick="closeModal('modal-building')">
+  <div class="modal" style="max-width:640px;" onclick="event.stopPropagation()">
+    <button class="modal-close" onclick="closeModal('modal-building')">✕</button>
+    <div class="modal-back" onclick="closeModal('modal-building')">
+      ← На карту
+    </div>
+    <div style="padding:28px;" id="modal-building-content">
+      <!-- populated by JS -->
+    </div>
+  </div>
+</div>
+
+<script>
+// ===== DATA =====
+const catalogItems = [
+  { id:1, title:'Советский камполон — образец продукции мясокомбината, 1941–1945', type:'Предметы', period:'1941-1945', kp:'КП 264437', inv:'ГМИ СПб Инв.№-V-Б-496р', size:'1.5×6.5×9 см', place:'СССР, РСФСР, Ленинград', cat:'62751852' },
+  { id:2, title:'Фотография главного здания мясокомбината, вид с фасада, 1935', type:'Фото', period:'1933-1941', kp:'КП 12045', inv:'ГМИ СПб Инв.№-Ф-1204', size:'13×18 см', place:'Ленинград', cat:'48203941' },
+  { id:3, title:'Приказ по мясокомбинату №47 об организации ночных смен в период блокады', type:'Документы', period:'1941-1945', kp:'КП 8823', inv:'Ф.12 Оп.1 Д.47', size:'21×29.7 см', place:'Ленинград', cat:'—' },
+  { id:4, title:'Удостоверение ударника производства Громовой А.П.', type:'Документы', period:'1931-1940', kp:'КП 5521', inv:'ГМИ СПб Инв.№-Д-0521', size:'7×10 см', place:'Ленинград', cat:'31920841' },
+  { id:5, title:'Цех переработки скота. Разрушения в годы ВОВ', type:'Фото', period:'1941-1945', kp:'КП 9901', inv:'ГМИ СПб Инв.№-Ф-0901', size:'9×13 см', place:'Ленинград', cat:'—' },
+  { id:6, title:'Личный фонд директора Петрова В.И. — плановые документы', type:'Документы', period:'1946-1992', kp:'КП 31002', inv:'Ф.3 Оп.1 Д.102', size:'—', place:'Ленинград', cat:'—' },
+  { id:7, title:'Корпус «Б» жилмассива мясокомбината — вид бокового фасада', type:'Фото', period:'1933-1941', kp:'КП 7741', inv:'ГМИ СПб Инв.№-Ф-0741', size:'13×18 см', place:'Московское шоссе, Ленинград', cat:'44010821' },
+  { id:8, title:'Орден Трудового Красного Знамени, врученный коллективу, 1948', type:'Предметы', period:'1946-1992', kp:'КП 41100', inv:'ГМИ СПб Инв.№-V-А-100', size:'Ø 42 мм', place:'СССР', cat:'71204411' },
+  { id:9, title:'Видеозапись празднования 50-летия комбината, 1980', type:'Видео', period:'1946-1992', kp:'КП 52001', inv:'ВИД-0021', size:'—', place:'Ленинград', cat:'—' },
+  { id:10, title:'Почётная грамота Наркомата мясной промышленности', type:'Документы', period:'1931-1940', kp:'КП 3312', inv:'ГМИ СПб Инв.№-Д-0312', size:'42×59 см', place:'Москва', cat:'28400121' },
+  { id:11, title:'Нагрудный знак «Отличник мясопрома СССР»', type:'Предметы', period:'1931-1940', kp:'КП 2201', inv:'ГМИ СПб Инв.№-V-Б-201', size:'Ø 30 мм', place:'СССР', cat:'19200812' },
+  { id:12, title:'Карта-схема территории предприятия, 1933', type:'Документы', period:'1933-1941', kp:'КП 6600', inv:'ГМИ СПб Инв.№-Д-0600', size:'60×84 см', place:'Ленинград', cat:'—' },
+];
+
+const fundsData = [
+  { id:'Ф-1', dates:'1930–1941', name:'ЛЕНИНГРАДСКИЙ МЯСОКОМБИНАТ ИМ. С.М. КИРОВА', desc:'Основной фонд предприятия. Приказы, планы, отчёты по производству.', opisei:4, del:1247 },
+  { id:'Ф-2', dates:'1941–1945', name:'ДОКУМЕНТЫ БЛОКАДНОГО ПЕРИОДА', desc:'Переписка, приказы, ведомости о работе комбината в условиях блокады.', opisei:2, del:312 },
+  { id:'Ф-3', dates:'1946–1992', name:'ЛИЧНЫЙ ФОНД ДИРЕКТОРА ПЕТРОВА В.И.', desc:'Личные документы, переписка, фотографии директора комбината 1961–1979 гг.', opisei:1, del:89 },
+  { id:'Ф-4', dates:'1930–1992', name:'ФОТОФОНД МЯСОКОМБИНАТА', desc:'Фотографии предприятия, сотрудников, событий и продукции.', opisei:3, del:2841 },
+  { id:'Ф-5', dates:'1931–1940', name:'ПРОЕКТНАЯ ДОКУМЕНТАЦИЯ', desc:'Чертежи и проектные материалы строительства корпусов 1930-х годов.', opisei:2, del:567 },
+  { id:'Ф-6', dates:'1992–2007', name:'ПОСТСОВЕТСКИЙ ПЕРИОД', desc:'Документы о реорганизации предприятия после 1991 года.', opisei:1, del:203 },
+];
+
+const staffData = [
+  { id:1, surname:'Громова', name:'Анна Петровна', years:'1935–1968', role:'Начальник смены убойного цеха', fund:'Ф-1', letter:'Г' },
+  { id:2, surname:'Петров', name:'Василий Иванович', years:'1961–1979', role:'Директор мясокомбината', fund:'Ф-3', letter:'П' },
+  { id:3, surname:'Захаров', name:'Михаил Сергеевич', years:'1938–1955', role:'Главный инженер', fund:'Ф-1', letter:'З' },
+  { id:4, surname:'Воронова', name:'Евдокия Фёдоровна', years:'1941–1944', role:'Бригадир колбасного цеха в блокаду', fund:'Ф-2', letter:'В' },
+  { id:5, surname:'Кузнецов', name:'Алексей Иванович', years:'1933–1960', role:'Технолог производства', fund:'Ф-1', letter:'К' },
+  { id:6, surname:'Морозова', name:'Нина Александровна', years:'1950–1985', role:'Лаборант ОТК', fund:null, letter:'М' },
+  { id:7, surname:'Сидоров', name:'Фёдор Михайлович', years:'1940–1975', role:'Механик холодильного цеха', fund:'Ф-1', letter:'С' },
+  { id:8, surname:'Лебедева', name:'Галина Николаевна', years:'1944–1970', role:'Нормировщик', fund:null, letter:'Л' },
+  { id:9, surname:'Иванов', name:'Пётр Васильевич', years:'1930–1941', role:'Первый начальник скотобазы', fund:'Ф-1', letter:'И' },
+  { id:10, surname:'Белова', name:'Тамара Константиновна', years:'1955–1992', role:'Главный бухгалтер', fund:null, letter:'Б' },
+  { id:11, surname:'Тихонов', name:'Аркадий Степанович', years:'1936–1965', role:'Зав. производственным отделом', fund:'Ф-5', letter:'Т' },
+  { id:12, surname:'Федорова', name:'Ольга Борисовна', years:'1968–2001', role:'Начальник отдела кадров', fund:null, letter:'Ф' },
+];
+
+const albumsData = [
+  { period:'Досоветский период (1900–1930)', albums:[
+    { title:'Вид на территорию до начала строительства', count:12 },
+    { title:'Первые строители комбината', count:8 },
+  ]},
+  { period:'Проектирование и строительство (1930–1933)', albums:[
+    { title:'Строительство главного корпуса', count:34 },
+    { title:'Монтаж оборудования', count:21 },
+    { title:'Торжественное открытие, 1933', count:16 },
+  ]},
+  { period:'Довоенный период (1933–1941)', albums:[
+    { title:'Рабочие будни', count:47 },
+    { title:'Стахановцы комбината', count:19 },
+    { title:'Жилой массив сотрудников', count:28 },
+  ]},
+  { period:'Блокадный период (1941–1944)', albums:[
+    { title:'Комбинат в годы блокады', count:15 },
+    { title:'Народное ополчение', count:9 },
+  ]},
+  { period:'Период расцвета (1944–1992)', albums:[
+    { title:'Восстановление предприятия', count:38 },
+    { title:'Юбилей 50 лет, 1980', count:24 },
+    { title:'Передовики производства', count:41 },
+  ]},
+  { period:'Постсоветский период (1992–2007)', albums:[
+    { title:'Реорганизация предприятия', count:17 },
+  ]},
+  { period:'Современность (2007–НД)', albums:[
+    { title:'Сотрудники сегодня', count:11 },
+    { title:'Музей трудовой и воинской славы', count:26 },
+  ]},
+];
+
+const buildingsData = {
+  lifestak: { name:'Лайф-стак', built:'1930–1932', desc:'Скотобаза — первый объект, возведённый на территории будущего мясокомбината. Принимала скот, поступавший со всей Ленинградской области. В годы блокады скотобаза продолжала работу в условиях острой нехватки кормов.', photos:4 },
+  util: { name:'Утиль-завод', built:'1933', desc:'Завод по переработке вторичного сырья — шкур, костей, жира. Обеспечивал безотходное производство. В 1941–1944 гг. использовался для нужд обороны города.', photos:7 },
+  uboyny: { name:'Убойно-разделочный корпус', built:'1932', desc:'Главный производственный корпус комбината. Проектировался ленинградскими инженерами по образцу современных американских мясокомбинатов. Серьёзно пострадал в ходе авиационных налётов 1941–1942 гг., восстановлен к 1946 году.', photos:15 },
+  cold: { name:'Холодильно-колбасный корпус', built:'1935', desc:'Введён в эксплуатацию в 1935 году. Включал холодильные камеры суммарной ёмкостью 5 000 тонн и цех по производству колбасных изделий. В блокаду стал одним из ключевых объектов продовольственного обеспечения Ленинграда.', photos:11 },
+  admin: { name:'Административный корпус', built:'1931', desc:'Построен одновременно с первыми производственными корпусами. Здесь размещались дирекция, плановый отдел и партийный комитет предприятия. В настоящее время в корпусе находится музей.', photos:6 },
+};
+
+const newsData = [
+  { date:'18 февраля 2026', title:'Открытие выставки «Блокадный мясокомбинат»', text:'В музее открылась постоянная экспозиция, посвящённая работе предприятия в годы блокады Ленинграда. В витринах представлены подлинные документы, личные вещи сотрудников и архивные фотографии 1941–1944 годов. На открытии присутствовали потомки работников блокадного комбината.' },
+  { date:'5 марта 2026', title:'Передача архива семьи Громовых', text:'Семья потомственных работников комбината передала в фонды музея личный архив Анны Петровны Громовой — бригадира убойного цеха в годы блокады. В составе архива — письма, фотографии, удостоверения и памятные предметы 1935–1968 годов.' },
+  { date:'1 марта 2026', title:'Первые результаты оцифровки фонда №12', text:'Завершён первый этап оцифровки архивных документов фонда №12. В цифровой каталог добавлено 347 новых карточек. Работа продолжается — на очереди описи 1941–1944 годов.' },
+  { date:'14 января 2026', title:'Экспедиция по записи воспоминаний ветеранов', text:'Музей объявляет о начале экспедиции по сбору устных воспоминаний ветеранов предприятия и их потомков. Экспедиция пройдёт в апреле 2026 года. Желающих принять участие просим обращаться по адресу музея.' },
+];
+
+// ===== NAVIGATION =====
+function showPage(name) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+  document.getElementById('page-' + name).classList.add('active');
+  // highlight nav
+  const navLinks = document.querySelectorAll('nav a');
+  const pageMap = { home:0, fond:1, gallery:2, staff:3, map:4, news:5 };
+  if (pageMap[name] !== undefined) navLinks[pageMap[name]].classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+// ===== FOND =====
+function renderCatalog(items) {
+  const grid = document.getElementById('catalog-grid');
+  grid.innerHTML = items.map(item => `
+    <div class="catalog-card" onclick="openItem(${item.id})">
+      <div class="catalog-card-img">
+        <span>Изображение</span>
+        <span class="item-type-badge">${item.type}</span>
+      </div>
+      <div class="catalog-card-info">
+        <h4>${item.title}</h4>
+        <p>${item.period} · ${item.kp}</p>
+      </div>
+    </div>
+  `).join('');
+  document.getElementById('result-count').textContent = `Найдено: ${items.length} предмета`;
+}
+
+function renderFunds() {
+  document.getElementById('funds-list').innerHTML = fundsData.map(f => `
+    <div class="fund-item">
+      <div>
+        <div class="fund-item-id">${f.id}</div>
+        <div class="fund-item-date">${f.dates}</div>
+      </div>
+      <div>
+        <div class="fund-item-name">${f.name}</div>
+        <div class="fund-item-desc">${f.desc}</div>
+      </div>
+      <div class="fund-item-stats">
+        <span>Описей: <strong>${f.opisei}</strong></span>
+        <span style="margin-top:4px">Дел: <strong>${f.del.toLocaleString()}</strong></span>
+      </div>
+    </div>
+  `).join('');
+}
+
+function filterCatalog() {
+  const q = document.getElementById('fond-search').value.toLowerCase();
+  const filtered = catalogItems.filter(i => i.title.toLowerCase().includes(q));
+  renderCatalog(filtered);
+}
+
+function switchFondMode(mode) {
+  const isC = mode === 'catalog';
+  document.getElementById('catalog-view').style.display = isC ? '' : 'none';
+  document.getElementById('funds-view').style.display = isC ? 'none' : '';
+  document.getElementById('btn-catalog').classList.toggle('active', isC);
+  document.getElementById('btn-funds').classList.toggle('active', !isC);
+}
+
+function openItem(id) {
+  const item = catalogItems.find(i => i.id === id);
+  if (!item) return;
+  document.getElementById('modal-item-content').innerHTML = `
+    <h2>${item.title}</h2>
+    <div class="modal-fields">
+      <div class="modal-field"><label>Период создания</label><span>${item.period}</span></div>
+      <div class="modal-field"><label>Размер</label><span>${item.size}</span></div>
+      <div class="modal-field"><label>Место создания</label><span>${item.place}</span></div>
+      <div class="modal-field"><label>Номер по КП</label><span>${item.kp}</span></div>
+      <div class="modal-field"><label>Инвентарный номер</label><span>${item.inv}</span></div>
+      <div class="modal-field"><label>Номер в Госкаталоге</label><span>${item.cat}</span></div>
+    </div>
+    ${item.type === 'Фото' ? '<span class="modal-link">→ Перейти в фотогалерею</span>' : ''}
+  `;
+  document.getElementById('modal-item').classList.add('open');
+}
+
+// ===== GALLERY =====
+function renderGallery() {
+  // Film strip (duplicate for seamless loop)
+  const photos = Array.from({length: 18}, (_, i) => `
+    <div class="film-photo">Фото ${i+1}</div>
+  `).join('');
+  document.getElementById('film-strip').innerHTML = photos + photos;
+
+  // Albums
+  const section = document.getElementById('albums-section');
+  section.innerHTML = albumsData.map(period => `
+    <div>
+      <p class="period-label">Исторический период</p>
+      <div class="period-title">${period.period}</div>
+      <div class="albums-grid">
+        ${period.albums.map(a => `
+          <div class="album-card">
+            <div class="album-cover">Обложка альбома</div>
+            <div class="album-info">
+              <h4>${a.title}</h4>
+              <p>${a.count} фотографий</p>
+            </div>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+  `).join('');
+}
+
+function scrollToAlbums() {
+  document.getElementById('albums-section').scrollIntoView({ behavior: 'smooth' });
+}
+
+// ===== STAFF =====
+function renderStaff(data) {
+  const letters = [...new Set(data.map(s => s.letter))].sort();
+  // Alphabet
+  const alpha = document.querySelector('.staff-alpha');
+  const allLetters = 'АБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЭЮЯ'.split('');
+  alpha.innerHTML = allLetters.map(l => `
+    <button class="alpha-btn ${letters.includes(l) ? '' : 'disabled'}" 
+      style="${!letters.includes(l) ? 'opacity:0.3;cursor:default' : ''}"
+      onclick="filterByLetter('${l}')">${l}</button>
+  `).join('');
+
+  document.getElementById('staff-grid').innerHTML = data.map(s => `
+    <div class="staff-card" onclick="openStaff(${s.id})">
+      <div class="staff-photo">Фото</div>
+      <div class="staff-info">
+        <h3>${s.surname}<br>${s.name}</h3>
+        <p>${s.years}</p>
+        <p style="color:var(--white-dim); margin-top:4px">${s.role}</p>
+        ${s.fund ? `<span class="staff-link">→ Личный фонд ${s.fund}</span>` : ''}
+      </div>
+    </div>
+  `).join('');
+  document.getElementById('staff-count').textContent = `Сотрудников: ${data.length}`;
+}
+
+function filterStaff(q) {
+  const filtered = staffData.filter(s =>
+    (s.surname + ' ' + s.name).toLowerCase().includes(q.toLowerCase())
+  );
+  renderStaff(filtered);
+}
+
+function filterByLetter(l) {
+  document.querySelectorAll('.alpha-btn').forEach(b => b.classList.toggle('active', b.textContent === l));
+  renderStaff(staffData.filter(s => s.letter === l));
+}
+
+function openStaff(id) {
+  const s = staffData.find(x => x.id === id);
+  document.getElementById('modal-item-content').innerHTML = `
+    <h2>${s.surname} ${s.name}</h2>
+    <div class="modal-fields">
+      <div class="modal-field"><label>Годы работы</label><span>${s.years}</span></div>
+      <div class="modal-field"><label>Должность</label><span>${s.role}</span></div>
+    </div>
+    <div style="margin-top:16px; font-family:'PT Serif',serif; font-size:13px; color:var(--white-dim); line-height:1.6;">
+      Краткая биографическая справка. Сведения о трудовой деятельности на предприятии, наградах и общественной работе будут добавлены по мере обработки архивных материалов.
+    </div>
+    ${s.fund ? `<span class="modal-link" onclick="closeModal('modal-item'); showPage('fond')">→ Перейти к личному фонду ${s.fund}</span>` : ''}
+  `;
+  document.getElementById('modal-item').classList.add('open');
+}
+
+// ===== MAP =====
+function showBuilding(key) {
+  const b = buildingsData[key];
+  document.getElementById('modal-building-content').innerHTML = `
+    <h2 style="font-family:'Oswald',sans-serif;font-size:22px;font-weight:700;text-transform:uppercase;color:var(--red-bright);letter-spacing:0.06em;margin-bottom:4px">${b.name}</h2>
+    <p style="font-family:'Oswald',sans-serif;font-size:12px;color:var(--gray);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:20px">Построено: ${b.built}</p>
+    <div style="height:160px;background:var(--dark3);border:1px solid var(--dark4);display:flex;align-items:center;justify-content:center;font-family:'Oswald',sans-serif;font-size:11px;color:var(--dark4);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:20px">Фотографии здания (${b.photos} фото)</div>
+    <p style="font-family:'PT Serif',serif;font-size:14px;color:var(--white-dim);line-height:1.7">${b.desc}</p>
+    <span class="modal-link" style="margin-top:16px">→ Фотографии в галерее</span>
+  `;
+  document.getElementById('modal-building').classList.add('open');
+}
+
+// ===== NEWS =====
+function renderNews() {
+  document.getElementById('news-feed').innerHTML = newsData.map(n => `
+    <div style="border-bottom:1px solid var(--dark3);padding:28px 0;max-width:760px;">
+      <div class="news-card-date">${n.date}</div>
+      <h3 style="font-family:'PT Serif',serif;font-size:20px;font-weight:700;color:var(--white);margin-bottom:12px;line-height:1.35">${n.title}</h3>
+      <div style="height:180px;background:var(--dark3);border:1px solid var(--dark4);display:flex;align-items:center;justify-content:center;font-family:'Oswald',sans-serif;font-size:11px;color:var(--dark4);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:16px">Фото события</div>
+      <p style="color:var(--white-dim);line-height:1.7;font-size:14px">${n.text}</p>
+    </div>
+  `).join('');
+}
+
+// ===== MODAL =====
+function closeModal(id) {
+  document.getElementById(id).classList.remove('open');
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    document.querySelectorAll('.modal-overlay').forEach(m => m.classList.remove('open'));
+  }
+});
+
+// ===== INIT =====
+renderCatalog(catalogItems);
+renderFunds();
+renderGallery();
+renderStaff(staffData);
+renderNews();
+</script>
+</body>
+</html>
